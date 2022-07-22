@@ -1,12 +1,17 @@
-import hash_map
+from hash_map import Map
+from package import Package
 import csv
 
+# Read packages from csv
+packages = []
 with open('Package File.csv') as package_file:
     reader = csv.reader(package_file, delimiter=',')
-    package_data = list(reader)
+    for index, row in enumerate(reader):
+        packages.append(Package(row[0], row[1], row[2], row[3], row[4], row[6], row[5], row[7]))
 
-for row in package_data:
-    print(row)
+# for package in packages:
+#     print(package.id, package.address)
+
 
 # with open('Distance Table.csv') as distance_file:
 #     reader = csv.reader(distance_file, delimiter=',')
