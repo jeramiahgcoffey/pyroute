@@ -8,3 +8,4 @@ class Package:
         self.deadline = deadline
         self.mass = mass
         self.notes = notes
+        self.distances = {}

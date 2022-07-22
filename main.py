@@ -8,12 +8,12 @@ with open('Package File.csv') as package_file:
 for row in package_data:
     print(row)
 
-with open('Distance Table.csv') as distance_file:
-    reader = csv.reader(distance_file, delimiter=',')
-    distance_data = list(reader)
-
-for row in distance_data:
-    print(row)
+# with open('Distance Table.csv') as distance_file:
+#     reader = csv.reader(distance_file, delimiter=',')
+#     distance_data = list(reader)
+#
+# for row in distance_data:
+#     print(row)
 # h = hash_map.Map(2)
 # h.add('Bob', '567-8888')
 # print(h.size)
