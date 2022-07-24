@@ -1,16 +1,22 @@
 from hash_map import Map
+from graph import Graph, Vertex
 from package import Package
 import csv
 
 
-def load_package_data():
-    """Loads package data into hash map and returns the hash map"""
+def load_package_data(data):
+    """
+    Loads package data into hash map and returns the hash map
+
+    :param data: The csv file to parse package data from
+    :return: A Map object representing package data with Package objects
+    """
 
     # Initialize hash map to store package data
     packages = Map()
 
     # Read packages from csv
-    with open('data/Package File.csv') as package_file:
+    with open(data) as package_file:
         reader = csv.reader(package_file, delimiter=',')
         for index, row in enumerate(reader):
             # Skip the column headers
@@ -21,4 +27,12 @@ def load_package_data():
     return packages
 
 
-package_data = load_package_data()
+def load_distance_data(data):
+
+    # Initialize graph to store distance data
+    distances = Graph()
+
+    # Read distances from csv
+
+
+package_data = load_package_data('data/Package File.csv')
