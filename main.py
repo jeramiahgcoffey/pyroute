@@ -16,7 +16,7 @@ def load_package_data(data):
     packages = Map()
 
     # Read packages from csv
-    with open(data) as package_file:
+    with open(data, 'r') as package_file:
         reader = csv.reader(package_file, delimiter=',')
         for index, row in enumerate(reader):
             # Skip the column headers
@@ -27,12 +27,49 @@ def load_package_data(data):
     return packages
 
 
-def load_distance_data(data):
+def load_address_data(data):
+    # Initialize dictionary to store vertices
+    addresses = {}
 
-    # Initialize graph to store distance data
+    with open(data, 'r') as distance_file:
+        reader = csv.DictReader(distance_file)
+        row_1 = next(reader)
+        for j, location in enumerate(row_1):
+            if j != 0:
+                addresses[location] = Vertex(location)
+                # distances.add_vertex(vertices[hub])
+
+    return addresses
+
+
+def load_distance_data(data, addresses):
+    # Initialize Graph to store distance data
     distances = Graph()
 
+    # Add address Vertex objects to Graph
+    for address in addresses:
+        vertex = addresses[address]
+        distances.add_vertex(vertex)
+
     # Read distances from csv
+    with open(data, 'r') as distance_file:
+        reader = csv.DictReader(distance_file)
+        for i, row in enumerate(reader):
+            # Skip column headers
+            if i != 0:
+                for j, col in enumerate(row):
+                    if j == 0:
+                        # The current row's hub
+                        vertex_a = addresses[row[col]]
+                    else:
+                        # The current columns hub
+                        vertex_b = addresses[col]
+                        # Adds the distance between the two hubs as an edge
+                        distances.add_edge(vertex_a, vertex_b, row[col])
+
+        return distances
 
 
 package_data = load_package_data('data/Package File.csv')
+address_data = load_address_data('data/Distance Table reformatted.csv')
+distance_data = load_distance_data('data/Distance Table reformatted.csv', address_data)
