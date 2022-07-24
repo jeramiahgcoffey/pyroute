@@ -6,7 +6,7 @@ import csv
 
 def load_package_data(data):
     """
-    Loads package data into hash map and returns the hash map
+    Loads package data into hash map and returns it
 
     :param data: The csv file to parse package data from
     :return: A Map object representing package data with Package objects
@@ -28,6 +28,13 @@ def load_package_data(data):
 
 
 def load_address_data(data):
+    """
+    Loads address data into a dictionary and returns it
+
+    :param data: The csv file to parse address data from
+    :return: A dictionary with addresses as keys and Vertex objects representing the addresses as values
+    """
+
     # Initialize dictionary to store vertices
     addresses = {}
 
@@ -43,6 +50,14 @@ def load_address_data(data):
 
 
 def load_distance_data(data, addresses):
+    """
+    Loads distance data into a Graph and returns it
+
+    :param data: The csv file to parse distance data from
+    :param addresses: A dictionary of addresses returned from load_address_data()
+    :return: A Graph object with addresses as Vertices and distances as edges
+    """
+
     # Initialize Graph to store distance data
     distances = Graph()
 
