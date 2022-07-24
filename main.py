@@ -10,7 +10,7 @@ def load_package_data():
     packages = Map()
 
     # Read packages from csv
-    with open('Package File.csv') as package_file:
+    with open('data/Package File.csv') as package_file:
         reader = csv.reader(package_file, delimiter=',')
         for index, row in enumerate(reader):
             # Skip the column headers
