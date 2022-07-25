@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from hash_map import Map
 from graph import Graph, Vertex
 from package import Package
@@ -47,7 +49,6 @@ def load_address_data(data):
         row_1 = next(reader)
         for j, location in enumerate(row_1):
             if j != 0:
-                print(location)
                 addresses[location] = Vertex(location)
 
     return addresses
@@ -78,10 +79,10 @@ def load_distance_data(data, addresses):
             if i != 0:
                 for j, col in enumerate(row):
                     if j == 0:
-                        # The current row's hub
+                        # The current row's location
                         vertex_a = addresses[row[col]]
                     else:
-                        # The current columns hub
+                        # The current columns location
                         vertex_b = addresses[col]
                         # Adds the distance between the two hubs as an edge
                         distances.add_edge(vertex_a, vertex_b, row[col])
@@ -90,6 +91,16 @@ def load_distance_data(data, addresses):
 
 
 def add_packages(truck_a, truck_b, truck_c):
+    """
+    Adds all Packages to their corresponding Truck's packages array
+
+    :param truck_a: A Truck object
+    :param truck_b: A Truck object
+    :param truck_c: A Truck object
+    :return: Boolean representing successful loading of packages (always True)
+    """
+
+    # Range should be one more than the amount of packages to be handled
     for i in range(1, 41):
         package = package_data.get(i)
         truck_number = int(package.truck)
@@ -100,13 +111,17 @@ def add_packages(truck_a, truck_b, truck_c):
         else:
             truck_c.add(package)
 
+    return True
+
 
 package_data = load_package_data('data/Package File.csv')
-address_data = load_address_data('data/Distance Table reformatted.csv')
-distance_data = load_distance_data('data/Distance Table reformatted.csv', address_data)
+address_data = load_address_data('data/distances.csv')
+distance_data = load_distance_data('data/distances.csv', address_data)
 
 truck_1 = Truck()
 truck_2 = Truck()
 truck_3 = Truck()
 
 add_packages(truck_1, truck_2, truck_3)
+
+distance_data.print()

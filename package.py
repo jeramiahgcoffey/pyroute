@@ -11,6 +11,7 @@ class Package:
         :param state: The delivery state
         :param zip: The delivery zip code
         :param mass: The package mass is kilograms
+        :param truck: The corresponding truck number
         :param deadline: The delivery deadline
         :param notes: Special notes associated with the package
         """
@@ -24,4 +25,3 @@ class Package:
         self.truck = truck
         self.mass = mass
         self.notes = notes
-
