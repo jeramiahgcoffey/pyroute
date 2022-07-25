@@ -1,6 +1,7 @@
 from hash_map import Map
 from graph import Graph, Vertex
 from package import Package
+from truck import Truck
 import csv
 
 
@@ -22,7 +23,10 @@ def load_package_data(data):
             # Skip the column headers
             if index != 0:
                 # Key: Package ID, Value: Package object
-                packages.add(int(row[0]), Package(row[0], row[1], row[2], row[3], row[4], row[6], row[5], row[7]))
+                packages.add(
+                    int(row[0]),
+                    Package(row[0], row[1], row[2], row[3], row[4], row[6], row[8], row[5], row[7])
+                )
 
     return packages
 
@@ -43,8 +47,8 @@ def load_address_data(data):
         row_1 = next(reader)
         for j, location in enumerate(row_1):
             if j != 0:
+                print(location)
                 addresses[location] = Vertex(location)
-                # distances.add_vertex(vertices[hub])
 
     return addresses
 
@@ -85,6 +89,24 @@ def load_distance_data(data, addresses):
         return distances
 
 
+def add_packages(truck_a, truck_b, truck_c):
+    for i in range(1, 41):
+        package = package_data.get(i)
+        truck_number = int(package.truck)
+        if truck_number == 1:
+            truck_a.add(package)
+        elif truck_number == 2:
+            truck_b.add(package)
+        else:
+            truck_c.add(package)
+
+
 package_data = load_package_data('data/Package File.csv')
 address_data = load_address_data('data/Distance Table reformatted.csv')
 distance_data = load_distance_data('data/Distance Table reformatted.csv', address_data)
+
+truck_1 = Truck()
+truck_2 = Truck()
+truck_3 = Truck()
+
+add_packages(truck_1, truck_2, truck_3)

@@ -1,7 +1,7 @@
 class Package:
     """The class holds package data"""
 
-    def __init__(self, id, address, city, state, zip, mass, deadline=None, notes=None):
+    def __init__(self, id, address, city, state, zip, mass, truck, deadline=None, notes=None):
         """
         This is the constructor for the Package class
 
@@ -21,5 +21,7 @@ class Package:
         self.state = state
         self.zip = zip
         self.deadline = deadline
+        self.truck = truck
         self.mass = mass
         self.notes = notes
+
