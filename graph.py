@@ -31,12 +31,12 @@ class Graph:
         :return: Boolean representing a successful addition (always True)
         """
 
-        self.adjacency_list[vertex] = []
+        self.adjacency_list[vertex.label] = []
         return True
 
     def add_edge(self, vertex_a, vertex_b, distance):
         """
-        Adds an edge to the distances dictionary, representing the distance between two Vertices
+        Adds an edge to the 'distances' dictionary, representing the distance between two Vertices
 
         :param vertex_a: A Vertex object
         :param vertex_b: A Vertex object
@@ -44,10 +44,10 @@ class Graph:
         :return: Boolean representing a successful addition (always True)
         """
 
-        self.distances[(vertex_a, vertex_b)] = distance
-        self.distances[(vertex_b, vertex_a)] = distance
-        self.adjacency_list[vertex_a].append(vertex_b)
-        self.adjacency_list[vertex_b].append(vertex_a)
+        self.distances[(vertex_a.label, vertex_b.label)] = distance
+        self.distances[(vertex_b.label, vertex_a.label)] = distance
+        self.adjacency_list[vertex_a.label].append(vertex_b.label)
+        self.adjacency_list[vertex_b.label].append(vertex_a.label)
         return True
 
     def print(self):
@@ -55,3 +55,4 @@ class Graph:
             for v in key:
                 print(v.label)
             print(value)
+

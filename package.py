@@ -25,3 +25,5 @@ class Package:
         self.truck = truck
         self.mass = mass
         self.notes = notes
+        self.status = ''
+
