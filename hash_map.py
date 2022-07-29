@@ -120,16 +120,11 @@ class Map:
                     return self.map[index].pop(i)
         return None
 
-    def print(self):
-        """
-        Prints the key value pair in the map
-
-        :return: None
-        """
-
+    def print_all_status(self):
         print('---------------------------')
         for item in self.map:
             if item is not None:
                 for pair in item:
-                    print(str(pair))
+                    package = pair[1]
+                    print(package.id, package.status)
 

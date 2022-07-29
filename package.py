@@ -24,10 +24,14 @@ class Package:
         self.notes = notes
         self.state = state
         self.status = 'AT HUB'
-        self.time_delivered = ''
+        self.time_delivered = None
+        self.time_loaded = None
         self.truck = truck
         self.zip = zip
 
     def set_notes(self, new_note):
         self.notes = new_note
+
+    def get_status(self):
+        return self.status
 
