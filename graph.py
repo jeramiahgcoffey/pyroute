@@ -36,7 +36,7 @@ class Graph:
 
     def add_edge(self, vertex_a, vertex_b, distance):
         """
-        Adds an edge to the 'distances' dictionary, representing the distance between two Vertices
+        This method adds an edge to the 'distances' dictionary, representing the distance between two Vertices
 
         :param vertex_a: A Vertex object
         :param vertex_b: A Vertex object

@@ -16,14 +16,18 @@ class Package:
         :param notes: Special notes associated with the package
         """
 
-        self.id = id
         self.address = address
         self.city = city
-        self.state = state
-        self.zip = zip
         self.deadline = deadline
-        self.truck = truck
+        self.id = id
         self.mass = mass
         self.notes = notes
-        self.status = ''
+        self.state = state
+        self.status = 'AT HUB'
+        self.time_delivered = ''
+        self.truck = truck
+        self.zip = zip
+
+    def set_notes(self, new_note):
+        self.notes = new_note
 

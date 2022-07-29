@@ -9,7 +9,7 @@ def load_package_data(data):
     Loads package data into hash map and returns it
 
     :param data: The csv file to parse package data from
-    :return: A Map object representing package data with Package objects
+    :return: A Map object representing package data as Package objects
     """
 
     # Initialize hash map to store package data
