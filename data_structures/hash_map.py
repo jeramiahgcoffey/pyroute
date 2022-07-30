@@ -1,6 +1,3 @@
-import datetime
-
-
 class Map:
     """This class implements a hash map"""
 
@@ -45,7 +42,7 @@ class Map:
         Increases the size of the map, and rehashes the current values
 
         :param size: The new size of the map as an Integer
-        :return: Boolean representing successful resize (always True)
+        :return: None
         """
 
         new_map = [None] * size
@@ -55,7 +52,6 @@ class Map:
                 for pair in bucket:
                     index = self._calc_hash(pair[0])
                     item = [pair[0], pair[1]]
-
                     if new_map[index] is None:
                         new_map[index] = list([item])
                     else:
@@ -63,9 +59,7 @@ class Map:
                             if key_value[0] == pair[0]:
                                 key_value[1] = item
                         new_map[index].append(item)
-
         self.map = new_map
-        return True
 
     def add(self, key, value):
         """
@@ -73,7 +67,7 @@ class Map:
 
         :param key: The key which is hashed
         :param value: The value which is stored
-        :return: Boolean representing successful addition (always True)
+        :return: None
         """
 
         self.count += 1
@@ -89,7 +83,6 @@ class Map:
             self.map[index].append(item)
 
         self._check_for_resize()
-        return True
 
     def get(self, key):
         """
@@ -123,20 +116,5 @@ class Map:
                     return self.map[index].pop(i)
         return None
 
-    def print_all_statuses(self, time=datetime.timedelta(hours=10)):
-        print('---------------------------')
-        for item in self.map:
-            if item is not None:
-                for pair in item:
-                    package = pair[1]
-                    if package.time_loaded is None:
-                        print(package.id, 'AT HUB')
-                    elif package.time_delivered is None:
-                        print(package.id, 'EN ROUTE')
-                    elif time >= package.time_delivered:
-                        print(package.id, 'DELIVERED')
-                    elif time >= package.time_loaded:
-                        print(package.id, 'EN ROUTE')
-                    else:
-                        print(package.id, 'AT HUB')
+
 

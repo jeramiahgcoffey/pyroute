@@ -1,7 +1,8 @@
 import csv
-from hash_map import Map
-from package import Package
-from graph import Vertex, Graph
+
+from data_structures.hash_map import Map
+from data_structures.package import Package
+from data_structures.graph import Vertex, Graph
 
 
 def load_package_data(data):

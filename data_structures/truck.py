@@ -1,5 +1,7 @@
-import datetime
+from datetime import timedelta
 import sys
+
+from utilities.pretty_time import pretty_time
 
 
 class Truck:
@@ -20,11 +22,15 @@ class Truck:
     def has_correct_address(self, package_arr):
         for package in package_arr:
             if package.notes == 'Wrong address listed':
-                if self.current_time > datetime.timedelta(hours=10, minutes=20):
-                    package.notes = ''
-                    package.address = '410 S State St'
-                    package.zip = '84111'
-                    print('Package #', package.id, 'Address Updated @', self.current_time)
+                if self.current_time > timedelta(hours=10, minutes=20):
+                    should_update = input(f'\nThe time is {pretty_time(self.current_time)}.\n'
+                                          f'Would you like to update the address for Package #{package.id}'
+                                          f' to 410 S State St., Salt Lake City, UT 84111?\nY/N: ').lower()
+                    if should_update != 'n':
+                        package.notes = f'Address updated at {pretty_time(self.current_time)}'
+                        package.address = '410 S State St'
+                        package.zip = '84111'
+                        print(f'\nPackage #{package.id} address updated at {pretty_time(self.current_time)}.')
                 else:
                     return False
         return True
@@ -50,7 +56,8 @@ class Truck:
         min_distance = sys.maxsize
         for address in self.distance_data.adjacency_list[self.current_location]:
             distance = float(self.distance_data.distances[(address, self.current_location)])
-            if distance < min_distance and address in self.on_board and self.has_correct_address(self.on_board[address]):
+            if distance < min_distance and address in self.on_board and self.has_correct_address(
+                    self.on_board[address]):
                 min_distance = float(self.distance_data.distances[(self.current_location, address)])
                 next_address = address
 
@@ -60,9 +67,8 @@ class Truck:
     def deliver_package(self, address, distance_traveled, time_took):
         self.current_location = address
         self.distance_traveled += distance_traveled
-        self.current_time += datetime.timedelta(seconds=time_took)
+        self.current_time += timedelta(seconds=time_took)
         while len(self.on_board[address]) > 0:
-            print(self.on_board[address][-1].deadline, self.current_time)
             self.on_board[address][-1].time_delivered = self.current_time
             self.on_board[address].pop()
         del self.on_board[address]
@@ -77,8 +83,7 @@ class Truck:
 
     def return_to_hub(self):
         distance = float(self.distance_data.distances[(self.current_location, 'HUB')])
-        self.current_time += datetime.timedelta(distance / 18 / 3600)
+        self.current_time += timedelta(distance / 18 / 3600)
         self.distance_traveled += distance
         self.return_time = self.current_time
         self.current_location = 'HUB'
-
