@@ -50,9 +50,3 @@ class Graph:
         self.adjacency_list[vertex_b.label].append(vertex_a.label)
         return True
 
-    def print(self):
-        for key, value in self.distances.items():
-            for v in key:
-                print(v.label)
-            print(value)
-

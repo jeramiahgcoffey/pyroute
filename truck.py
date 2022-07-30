@@ -17,16 +17,25 @@ class Truck:
         self.package_data = package_data
         self.return_time = None
 
-    # def can_update_address(self, time):
-    #     if self.current_time.total_seconds() > datetime.timedelta(hours=10, minutes=20):
+    def has_correct_address(self, package_arr):
+        for package in package_arr:
+            if package.notes == 'Wrong address listed':
+                if self.current_time > datetime.timedelta(hours=10, minutes=20):
+                    package.notes = ''
+                    package.address = '410 S State St'
+                    package.zip = '84111'
+                    print('Package #', package.id, 'Address Updated @', self.current_time)
+                else:
+                    return False
+        return True
 
     def load_truck(self, time_loaded):
         self.current_time = time_loaded
+
         for i in range(1, self.package_data.count + 1):
             package = self.package_data.get(i)
             if package.truck == self.id:
                 if len(self.on_board) < self.capacity:
-                    package.status = "EN ROUTE"
                     package.time_loaded = self.current_time
                     if package.address not in self.on_board:
                         self.on_board[package.address] = [package]
@@ -38,11 +47,10 @@ class Truck:
         return True
 
     def find_next_delivery(self):
-        print('here')
         min_distance = sys.maxsize
         for address in self.distance_data.adjacency_list[self.current_location]:
             distance = float(self.distance_data.distances[(address, self.current_location)])
-            if distance < min_distance and address in self.on_board:
+            if distance < min_distance and address in self.on_board and self.has_correct_address(self.on_board[address]):
                 min_distance = float(self.distance_data.distances[(self.current_location, address)])
                 next_address = address
 
@@ -54,9 +62,9 @@ class Truck:
         self.distance_traveled += distance_traveled
         self.current_time += datetime.timedelta(seconds=time_took)
         while len(self.on_board[address]) > 0:
-            self.on_board[address][-1].status = "DELIVERED"
+            print(self.on_board[address][-1].deadline, self.current_time)
+            self.on_board[address][-1].time_delivered = self.current_time
             self.on_board[address].pop()
-            print(self.on_board[address])
         del self.on_board[address]
 
     def deliver_packages(self):

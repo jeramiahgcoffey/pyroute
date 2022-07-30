@@ -23,7 +23,6 @@ class Package:
         self.mass = mass
         self.notes = notes
         self.state = state
-        self.status = 'AT HUB'
         self.time_delivered = None
         self.time_loaded = None
         self.truck = truck

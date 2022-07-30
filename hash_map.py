@@ -1,3 +1,6 @@
+import datetime
+
+
 class Map:
     """This class implements a hash map"""
 
@@ -120,11 +123,20 @@ class Map:
                     return self.map[index].pop(i)
         return None
 
-    def print_all_status(self):
+    def print_all_statuses(self, time=datetime.timedelta(hours=10)):
         print('---------------------------')
         for item in self.map:
             if item is not None:
                 for pair in item:
                     package = pair[1]
-                    print(package.id, package.status)
+                    if package.time_loaded is None:
+                        print(package.id, 'AT HUB')
+                    elif package.time_delivered is None:
+                        print(package.id, 'EN ROUTE')
+                    elif time >= package.time_delivered:
+                        print(package.id, 'DELIVERED')
+                    elif time >= package.time_loaded:
+                        print(package.id, 'EN ROUTE')
+                    else:
+                        print(package.id, 'AT HUB')
 
