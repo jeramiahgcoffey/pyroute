@@ -7,10 +7,10 @@ from data_structures.graph import Vertex, Graph
 
 def load_package_data(data):
     """
-    Loads package data into hash map and returns it
+    Load package data into a hash map and return it.
 
-    :param data: The csv file to parse package data from
-    :return: A Map object representing package data as Package objects
+    :param data: String. The csv file to parse package data from.
+    :return: A Map object representing package data as Package objects.
     """
 
     # Initialize hash map to store package data
@@ -33,15 +33,16 @@ def load_package_data(data):
 
 def load_address_data(data):
     """
-    Loads address data into a dictionary and returns it
+    Load address data into a dictionary and return it.
 
-    :param data: The csv file to parse address data from
-    :return: A dictionary with addresses as keys and Vertex objects representing the addresses as values
+    :param data: String. The csv file to parse address data from.
+    :return: A dictionary with addresses as keys and Vertex objects representing the addresses as values.
     """
 
     # Initialize dictionary to store vertices
     addresses = {}
 
+    # Read addresses from csv
     with open(data, 'r') as distance_file:
         reader = csv.DictReader(distance_file)
         row_1 = next(reader)
@@ -54,11 +55,11 @@ def load_address_data(data):
 
 def load_distance_data(data, addresses):
     """
-    Loads distance data into a Graph and returns it
+    Load distance data into a Graph and return it.
 
-    :param data: The csv file to parse distance data from
-    :param addresses: A dictionary of addresses returned from load_address_data()
-    :return: A Graph object with addresses as Vertices and distances as edges
+    :param data: String. The csv file to parse distance data from.
+    :param addresses: Dictionary. Addresses returned from load_address_data().
+    :return: A Graph object with addresses as Vertices and distances as edges.
     """
 
     # Initialize Graph to store distance data

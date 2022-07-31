@@ -2,24 +2,32 @@ from controller import Controller
 
 
 def clear():
+    """'Clear' console by printing 100 blank lines"""
+
     print('\n' * 100)
 
 
 def quit_app():
+    """Quit application with exit code 0"""
+
     raise SystemExit(0)
 
 
 def start_app():
+    """Start application UI. Contains main loop which gets user selections and calls the respective methods."""
+
     should_start_day = input('WELCOME TO THE WGUPS ROUTING PROGRAM\n'
                              'ENTER Q TO QUIT, ENTER ANY OTHER KEY TO START DAY: ').lower() != 'q'
 
+    # Starts routing if user doesn't quit
     if should_start_day:
-        handler.start_day()
+        controller.start_day()
     else:
         quit_app()
 
     user_selection = None
 
+    # Main loop which waits for user selection and calls the respective method on the controller
     while user_selection != 'q':
         user_selection = input('\nWhat would you like to do?\n'
                                ' 1. Get all package statuses at a specific time\n'
@@ -30,8 +38,10 @@ def start_app():
                                ' Q. Quit the application\n'
                                'Enter option: ').lower()
 
+        # The next Controller method to be called is the return value of ui_options when the user selection is passed in
         next_function = ui_options(user_selection)
 
+        # Selections 1 - 3 have specific formatting checks and exception handling
         if user_selection == '1':
             clear()
             timestamp = None
@@ -76,15 +86,22 @@ def start_app():
 
 
 def ui_options(case):
+    """
+    Take in user selection and return a method from the Controller to be called inside the main loop in start_app
+
+    :param case: String. User selection received inside the main loop in start_app.
+    :return: A Controller method to be called inside the main loop in start_app.
+    """
     return {
-        '1': handler.print_all_statuses,
-        '2': handler.print_package,
-        '3': handler.print_truck,
-        '4': handler.print_total_distance,
-        '5': handler.print_total_time,
+        '1': controller.print_all_statuses,
+        '2': controller.print_package,
+        '3': controller.print_truck,
+        '4': controller.print_total_distance,
+        '5': controller.print_total_time,
         'q': quit_app
     }[case] or quit_app
 
 
-handler = Controller()
+# Initialize the Controller and start the UI
+controller = Controller()
 start_app()

@@ -1,11 +1,11 @@
 class Map:
-    """This class implements a hash map"""
+    """Hash map implementation"""
 
     def __init__(self, size=40):
         """
-        This is the constructor for the Map class
+        Initialize Map object.
 
-        :param size: Integer representing the initial size of the hash map
+        :param size: Integer. The initial size of the hash map.
         """
 
         self.count = 0
@@ -14,10 +14,10 @@ class Map:
 
     def _calc_hash(self, key):
         """
-        The method which calculates the hashed key value
+        Calculate the hashed key value.
 
-        :param key: The key to be hashed
-        :return: The hashed key value as an Integer
+        :param key: Any. The key to be hashed
+        :return: Integer. The hashed key value.
         """
 
         hash_value = 0
@@ -27,9 +27,9 @@ class Map:
 
     def _check_for_resize(self):
         """
-        Checks if map needs to resize based on the current count
+        Check if map needs to resize based on the current count.
 
-        :return: Boolean representing if a resize is needed
+        :return: Boolean. Represents if a resize is needed.
         """
 
         if self.count == self.size - 1:
@@ -39,10 +39,9 @@ class Map:
 
     def _resize(self, size):
         """
-        Increases the size of the map, and rehashes the current values
+        Create new map, and rehash the current values.
 
-        :param size: The new size of the map as an Integer
-        :return: None
+        :param size: Integer. The new size of the map.
         """
 
         new_map = [None] * size
@@ -63,11 +62,10 @@ class Map:
 
     def add(self, key, value):
         """
-        Adds new key value pair to the map
+        Add new key value pair to the map.
 
-        :param key: The key which is hashed
-        :param value: The value which is stored
-        :return: None
+        :param key: Any. The key which is hashed.
+        :param value: Any. The value which is stored.
         """
 
         self.count += 1
@@ -86,10 +84,10 @@ class Map:
 
     def get(self, key):
         """
-        Gets the value associated with the key passed in
+        Get the value associated with the key passed in.
 
-        :param key: The key which the value is associated with
-        :return: The value which is associated with the key passed in, or None if not found
+        :param key: Any. The key which the value is associated with.
+        :return: Any. The value which is associated with the key passed in, or None if not found
         """
 
         index = self._calc_hash(key)
@@ -101,10 +99,10 @@ class Map:
 
     def delete(self, key):
         """
-        Deletes the key value pair which is associated with the key passed in
+        Delete the key value pair which is associated with the key passed in.
 
-        :param key: The key which the pair is associated with
-        :return: The deleted key value pair or None if not found
+        :param key: Any. The key which the pair is associated with.
+        :return: Any. The deleted key value pair, or None if not found.
         """
 
         self.count -= 1

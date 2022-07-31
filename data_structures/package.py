@@ -1,19 +1,19 @@
 class Package:
-    """The class holds package data"""
+    """Models Package objects"""
 
     def __init__(self, id, address, city, state, zip, mass, truck, deadline=None, notes=None):
         """
-        This is the constructor for the Package class
+        Initialize Package objects.
 
-        :param id: The package ID
-        :param address: The delivery street address
-        :param city: The delivery city
-        :param state: The delivery state
-        :param zip: The delivery zip code
-        :param mass: The package mass is kilograms
-        :param truck: The corresponding truck number
-        :param deadline: The delivery deadline
-        :param notes: Special notes associated with the package
+        :param id: Integer. The package ID.
+        :param address: String. The delivery street address.
+        :param city: String. The delivery city.
+        :param state: String. The delivery state.
+        :param zip: String. The delivery zip code.
+        :param mass: String. The package mass in kilograms.
+        :param truck: Integer. The corresponding truck ID.
+        :param deadline: String. The delivery deadline.
+        :param notes: String. Special notes associated with the package.
         """
 
         self.address = address
@@ -28,9 +28,4 @@ class Package:
         self.truck = truck
         self.zip = zip
 
-    def set_notes(self, new_note):
-        self.notes = new_note
-
-    def get_status(self):
-        return self.status
 
