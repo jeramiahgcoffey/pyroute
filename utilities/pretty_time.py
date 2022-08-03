@@ -2,6 +2,9 @@ def pretty_time(timedelta):
     """
     Format timedelta to a 12-hour clock time string.
 
+    Time Complexity: O(1)
+    Space Complexity: O(1)
+
     :param timedelta: Timedelta object to format.
     :return: String. The formatted time.
     """

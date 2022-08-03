@@ -5,6 +5,9 @@ class Map:
         """
         Initialize Map object.
 
+        Time Complexity: O(N)
+        Space Complexity: O(N)
+
         :param size: Integer. The initial size of the hash map.
         """
 
@@ -15,6 +18,9 @@ class Map:
     def _calc_hash(self, key):
         """
         Calculate the hashed key value.
+
+        Time Complexity: O(N)
+        Space Complexity: O(1)
 
         :param key: Any. The key to be hashed
         :return: Integer. The hashed key value.
@@ -29,6 +35,9 @@ class Map:
         """
         Check if map needs to resize based on the current count.
 
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+
         :return: Boolean. Represents if a resize is needed.
         """
 
@@ -38,8 +47,12 @@ class Map:
         return False
 
     def _resize(self, size):
+        # TODO: Refactor this method to be less than O(N^3)
         """
         Create new map, and rehash the current values.
+
+        Time Complexity: Average - O(N^2)  Worst - O(N^3)
+        Space Complexity: O(N^2)
 
         :param size: Integer. The new size of the map.
         """
@@ -64,6 +77,9 @@ class Map:
         """
         Add new key value pair to the map.
 
+        Time Complexity: Average - O(1)  Worst - O(N)
+        Space Complexity: O(1)
+
         :param key: Any. The key which is hashed.
         :param value: Any. The value which is stored.
         """
@@ -86,6 +102,9 @@ class Map:
         """
         Get the value associated with the key passed in.
 
+        Time Complexity: Average - O(1)  Worst - O(N)
+        Space Complexity: O(1)
+
         :param key: Any. The key which the value is associated with.
         :return: Any. The value which is associated with the key passed in, or None if not found
         """
@@ -100,6 +119,9 @@ class Map:
     def delete(self, key):
         """
         Delete the key value pair which is associated with the key passed in.
+
+        Time Complexity: Average - O(1)  Worst - O(N)
+        Space Complexity: O(1)
 
         :param key: Any. The key which the pair is associated with.
         :return: Any. The deleted key value pair, or None if not found.

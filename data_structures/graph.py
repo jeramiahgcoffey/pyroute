@@ -5,6 +5,9 @@ class Vertex:
         """
         Initialize Vertex objects.
 
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+
         :param label: String. The name of the vertex.
         """
         self.label = label
@@ -16,8 +19,10 @@ class Graph:
     def __init__(self):
         """
         Initialize Graph objects.
-
         Set adjacency list and distances to empty dictionaries.
+
+        Time Complexity: O(1)
+        Space Complexity: O(1)
         """
 
         self.adjacency_list = {}
@@ -27,6 +32,9 @@ class Graph:
         """
         Add a Vertex to the adjacency list, set its value as an empty array.
 
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+
         :param vertex: Vertex object to add to the adjacency list.
         """
 
@@ -35,6 +43,9 @@ class Graph:
     def add_edge(self, vertex_a, vertex_b, distance):
         """
         Add an edge to the 'distances' dictionary, representing the distance between two Vertices.
+
+        Time Complexity: O(1)
+        Space Complexity: O(1)
 
         :param vertex_a: A Vertex object.
         :param vertex_b: A Vertex object.

@@ -10,7 +10,12 @@ class Controller:
     """UI and delivery controller. Contains methods to be called from the main loop."""
 
     def __init__(self):
-        """Initialize Controller object"""
+        """
+        Initialize Controller object
+
+        Time Complexity: O(N^2)
+        Space Complexity: O(N)
+        """
 
         # Read package data file and return a hash map with Package ID as keys and Package objects as values
         self.package_data = load_package_data('data/Package File.csv')
@@ -26,6 +31,9 @@ class Controller:
         Initializes Truck objects and adds them to the self.trucks dictionary with their IDs as keys.
         Load Trucks with Packages from self.package_data.
         Starts each Truck's route.
+
+        Time Complexity: O(N^2)
+        Space Complexity: O(N^2)
         """
 
         # Create truck objects, passing in departure time, the ID, package data and distance graph
@@ -55,6 +63,9 @@ class Controller:
         """
         Print Package data.
 
+        Time Complexity: Average - O(1)  Worst - O(N)
+        Space Complexity: O(1)
+
         :param id: Integer. Package ID.
         """
 
@@ -73,6 +84,9 @@ class Controller:
         """
         Print Truck data.
 
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+
         :param id: Integer. Truck ID.
         """
 
@@ -87,6 +101,9 @@ class Controller:
     def print_all_statuses(self, timestamp='9:00'):
         """
         Print all Package statuses at the given time.
+
+        Time Complexity: Average - O(N)  Worst - O(N^2)
+        Space Complexity: O(1)
 
         :param timestamp: String. 24-hour timestamp. HH:MM
         """
@@ -132,7 +149,12 @@ class Controller:
         print(table)
 
     def print_total_distance(self):
-        """Print total distance traveled between all Trucks in self.trucks dictionary."""
+        """
+        Print total distance traveled between all Trucks in self.trucks dictionary.
+
+        Time Complexity: O(N)
+        Space Complexity: O(1)
+        """
 
         total_distance = 0
         # Loop through self.trucks dictionary and add distance_traveled to the total_distance
@@ -146,7 +168,12 @@ class Controller:
         print(f'TOTAL DISTANCE TRAVELED: {round(total_distance)} MILES')
 
     def print_total_time(self):
-        """Print the duration from when the first Truck left the HUB to when the last Truck returned to the HUB"""
+        """
+        Print the duration from when the first Truck left the HUB to when the last Truck returned to the HUB
+
+        Time Complexity: O(N)
+        Space Complexity: O(1)
+        """
 
         earliest = None
         latest = None

@@ -5,6 +5,9 @@ class Package:
         """
         Initialize Package objects.
 
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+
         :param id: Integer. The package ID.
         :param address: String. The delivery street address.
         :param city: String. The delivery city.

@@ -9,6 +9,9 @@ def load_package_data(data):
     """
     Load package data into a hash map and return it.
 
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+
     :param data: String. The csv file to parse package data from.
     :return: A Map object representing package data as Package objects.
     """
@@ -35,6 +38,9 @@ def load_address_data(data):
     """
     Load address data into a dictionary and return it.
 
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+
     :param data: String. The csv file to parse address data from.
     :return: A dictionary with addresses as keys and Vertex objects representing the addresses as values.
     """
@@ -56,6 +62,9 @@ def load_address_data(data):
 def load_distance_data(data, addresses):
     """
     Load distance data into a Graph and return it.
+
+    Time Complexity: O(N^2)
+    Space Complexity: O(N)
 
     :param data: String. The csv file to parse distance data from.
     :param addresses: Dictionary. Addresses returned from load_address_data().

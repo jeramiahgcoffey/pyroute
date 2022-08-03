@@ -11,6 +11,9 @@ class Truck:
         """
         Initialize Truck object.
 
+        Time Complexity: O(1)
+        Space Complexity: O(N)
+
         :param id: Integer. The Truck ID.
         :param package_data: Map. Hash map of package data.
         :param distance_graph: Graph. Graph of addresses and distance data.
@@ -27,10 +30,13 @@ class Truck:
         self.package_data = package_data
         self.return_time = None
 
-    def has_correct_address(self, package_arr):
+    def _has_correct_address(self, package_arr):
         """
         Check if Packages in an array have a note warning of an incorrect listed address.
         Update address if incorrect and a time constraint is met.
+
+        Time Complexity: O(N)
+        Space Complexity: O(1)
 
         :param package_arr: List. Array of packages to check.
         :return: Boolean. False if no warning or address was updated. True otherwise.
@@ -56,6 +62,9 @@ class Truck:
         """
         Add respective Package objects to self.on_board, based on Package's truck attribute.
 
+        Time Complexity: O(N)
+        Space Complexity: O(N^2)
+
         :param timestamp: Timedelta. The time the truck is loaded at.
         """
 
@@ -73,33 +82,40 @@ class Truck:
                 else:
                     print('PACKAGE LOADING ERROR')
 
-    def find_next_delivery(self):
+    def _find_next_delivery(self):
         """
-        Nearest Neighbor Algorithm implementation.
+        Nearest Neighbor algorithm implementation.
         Find next closest delivery address.
         Calls deliver_package with the next closest address.
+
+        Time Complexity: O(N)
+        Space Complexity: O(1)
         """
 
         min_distance = sys.maxsize
+        next_address = None
         for address in self.distance_data.adjacency_list[self.current_location]:
-            distance = float(self.distance_data.distances[(address, self.current_location)])
-            if distance < min_distance and address in self.on_board and \
-                    self.has_correct_address(self.on_board[address]):
-                min_distance = float(self.distance_data.distances[(self.current_location, address)])
-                next_address = address
+            if address in self.on_board:
+                distance = float(self.distance_data.distances[(address, self.current_location)])
+                if distance < min_distance and self._has_correct_address(self.on_board[address]):
+                    min_distance = distance
+                    next_address = address
 
         time_took = min_distance / 18 * 3600
 
         # Call self.deliver_package with the next closest address
-        self.deliver_package(next_address, min_distance, time_took)
+        self._deliver_package(next_address, min_distance, time_took)
 
-    def deliver_package(self, address, distance_traveled, time_took):
+    def _deliver_package(self, address, distance_traveled, time_took):
         """
         Deliver Packages associated with the address passed in.
 
         :param address: String. Address which Packages are associated with.
         :param distance_traveled: Float. Miles traveled to get to this address.
         :param time_took: Float. Seconds taken to travel to address.
+
+        Time Complexity: O(N)
+        Space Complexity: O(1)
         """
 
         self.current_location = address
@@ -111,17 +127,28 @@ class Truck:
         del self.on_board[address]
 
     def deliver_packages(self):
-        """Start loop to deliver all Package objects. Calls return_to_hub when self.on_board has no more Packages"""
+        """
+        Start loop to deliver all Package objects using the Nearest Neighbor algorithm.
+        Calls return_to_hub when self.on_board has no more Packages.
+
+        Time Complexity: O(N^2)
+        Space Complexity: O(1)
+        """
 
         self.departure_time = self.current_time
-        while len(self.on_board) > 0:
-            self.find_next_delivery()
+        while len(self.on_board) > 0:  # O(N)
+            self._find_next_delivery()  # O(N)
 
         # Go back to HUB
-        self.return_to_hub()
+        self._return_to_hub()  # O(1)
 
-    def return_to_hub(self):
-        """Return to HUB after all deliveries."""
+    def _return_to_hub(self):
+        """
+        Return to HUB after all deliveries.
+
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+        """
 
         distance = float(self.distance_data.distances[(self.current_location, 'HUB')])
         self.current_time += timedelta(distance / 18 / 3600)

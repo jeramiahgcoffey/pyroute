@@ -13,8 +13,16 @@ def quit_app():
     raise SystemExit(0)
 
 
-def start_app():
-    """Start application UI. Contains main loop which gets user selections and calls the respective methods."""
+def main():
+    """
+    Start application and UI. Contains main loop which gets user selections and calls the respective methods.
+
+    Time Complexity: O(N^2)
+    Space Complexity: O(N^2)
+    """
+
+    # Initialize Controller
+    controller = Controller()
 
     should_start_day = input('WELCOME TO THE WGUPS ROUTING PROGRAM\n'
                              'ENTER Q TO QUIT, ENTER ANY OTHER KEY TO START DAY: ').lower() != 'q'
@@ -39,7 +47,7 @@ def start_app():
                                'Enter option: ').lower()
 
         # The next Controller method to be called is the return value of ui_options when the user selection is passed in
-        next_function = ui_options(user_selection)
+        next_function = ui_options(user_selection, controller)
 
         # Selections 1 - 3 have specific formatting checks and exception handling
         if user_selection == '1':
@@ -85,11 +93,15 @@ def start_app():
             next_function()
 
 
-def ui_options(case):
+def ui_options(case, controller):
     """
     Take in user selection and return a method from the Controller to be called inside the main loop in start_app
 
+    Time Complexity: O(1)
+    Space Complexity: O(1)
+
     :param case: String. User selection received inside the main loop in start_app.
+    :param controller: The application Controller.
     :return: A Controller method to be called inside the main loop in start_app.
     """
     return {
@@ -102,6 +114,5 @@ def ui_options(case):
     }[case] or quit_app
 
 
-# Initialize the Controller and start the UI
-controller = Controller()
-start_app()
+# Start application
+main()
