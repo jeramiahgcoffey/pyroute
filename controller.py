@@ -96,7 +96,7 @@ class Controller:
               f'Capacity:          {truck.capacity}\n'
               f'Departure Time:    {pretty_time(truck.departure_time)}\n'
               f'Return Time:       {pretty_time(truck.return_time)}\n'
-              f'Distance Traveled: {truck.distance_traveled} miles')
+              f'Distance Traveled: {round(truck.distance_traveled, 2)} miles')
 
     def print_all_statuses(self, timestamp='9:00'):
         """
@@ -146,7 +146,7 @@ class Controller:
                                    package.deadline,
                                    time_delivered])
 
-        print(table)
+        print(table.get_string(sortby="ID"))
 
     def print_total_distance(self):
         """

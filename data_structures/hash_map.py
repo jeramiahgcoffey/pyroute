@@ -51,8 +51,8 @@ class Map:
         """
         Create new map, and rehash the current values.
 
-        Time Complexity: Average - O(N^2)  Worst - O(N^3)
-        Space Complexity: O(N^2)
+        Time Complexity: Average - O(N^2)  Worst - O(N^2+M)
+        Space Complexity: O(N)
 
         :param size: Integer. The new size of the map.
         """
@@ -77,7 +77,7 @@ class Map:
         """
         Add new key value pair to the map.
 
-        Time Complexity: Average - O(1)  Worst - O(N)
+        Time Complexity: Average - O(N)  Worst - O(N+M)
         Space Complexity: O(1)
 
         :param key: Any. The key which is hashed.
@@ -94,6 +94,8 @@ class Map:
             for pair in self.map[index]:
                 if pair[0] == key:
                     pair[1] = value
+                    self._check_for_resize()
+                    return
             self.map[index].append(item)
 
         self._check_for_resize()

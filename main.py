@@ -46,6 +46,9 @@ def main():
                                ' Q. Quit the application\n'
                                'Enter option: ').lower()
 
+        if user_selection == 'q':
+            quit_app()
+
         # The next Controller method to be called is the return value of ui_options when the user selection is passed in
         next_function = ui_options(user_selection, controller)
 
@@ -104,14 +107,18 @@ def ui_options(case, controller):
     :param controller: The application Controller.
     :return: A Controller method to be called inside the main loop in start_app.
     """
-    return {
-        '1': controller.print_all_statuses,
-        '2': controller.print_package,
-        '3': controller.print_truck,
-        '4': controller.print_total_distance,
-        '5': controller.print_total_time,
-        'q': quit_app
-    }[case] or quit_app
+
+    try:
+        return {
+            '1': controller.print_all_statuses,
+            '2': controller.print_package,
+            '3': controller.print_truck,
+            '4': controller.print_total_distance,
+            '5': controller.print_total_time,
+        }[case]
+    except KeyError:
+        print('Invalid Entry, Exiting...')
+        quit_app()
 
 
 # Start application

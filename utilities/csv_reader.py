@@ -9,7 +9,7 @@ def load_package_data(data):
     """
     Load package data into a hash map and return it.
 
-    Time Complexity: O(N)
+    Time Complexity: Average - O(N)  Worst - O(N+M)
     Space Complexity: O(N)
 
     :param data: String. The csv file to parse package data from.

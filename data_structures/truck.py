@@ -26,7 +26,7 @@ class Truck:
         self.distance_data = distance_graph
         self.distance_traveled = 0
         self.id = id
-        self.on_board = {}
+        self.onboard = {}
         self.package_data = package_data
         self.return_time = None
 
@@ -63,7 +63,7 @@ class Truck:
         Add respective Package objects to self.on_board, based on Package's truck attribute.
 
         Time Complexity: O(N)
-        Space Complexity: O(N^2)
+        Space Complexity: Average - O(N)  Worst - O(N^2)
 
         :param timestamp: Timedelta. The time the truck is loaded at.
         """
@@ -73,12 +73,12 @@ class Truck:
         for i in range(1, self.package_data.count + 1):
             package = self.package_data.get(i)
             if package.truck == self.id:
-                if len(self.on_board) < self.capacity:
+                if len(self.onboard) < self.capacity:
                     package.time_loaded = self.current_time
-                    if package.address not in self.on_board:
-                        self.on_board[package.address] = [package]
+                    if package.address not in self.onboard:
+                        self.onboard[package.address] = [package]
                     else:
-                        self.on_board[package.address].append(package)
+                        self.onboard[package.address].append(package)
                 else:
                     print('PACKAGE LOADING ERROR')
 
@@ -95,9 +95,9 @@ class Truck:
         min_distance = sys.maxsize
         next_address = None
         for address in self.distance_data.adjacency_list[self.current_location]:
-            if address in self.on_board:
+            if address in self.onboard:
                 distance = float(self.distance_data.distances[(address, self.current_location)])
-                if distance < min_distance and self._has_correct_address(self.on_board[address]):
+                if distance < min_distance and self._has_correct_address(self.onboard[address]):
                     min_distance = distance
                     next_address = address
 
@@ -114,29 +114,29 @@ class Truck:
         :param distance_traveled: Float. Miles traveled to get to this address.
         :param time_took: Float. Seconds taken to travel to address.
 
-        Time Complexity: O(N)
+        Time Complexity: Average - O(1)  Worst - O(N)
         Space Complexity: O(1)
         """
 
         self.current_location = address
         self.distance_traveled += distance_traveled
         self.current_time += timedelta(seconds=time_took)
-        while len(self.on_board[address]) > 0:
-            self.on_board[address][-1].time_delivered = self.current_time
-            self.on_board[address].pop()
-        del self.on_board[address]
+        while len(self.onboard[address]) > 0:
+            self.onboard[address][-1].time_delivered = self.current_time
+            self.onboard[address].pop()
+        del self.onboard[address]
 
     def deliver_packages(self):
         """
         Start loop to deliver all Package objects using the Nearest Neighbor algorithm.
         Calls return_to_hub when self.on_board has no more Packages.
 
-        Time Complexity: O(N^2)
+        Time Complexity: O(N)
         Space Complexity: O(1)
         """
 
         self.departure_time = self.current_time
-        while len(self.on_board) > 0:  # O(N)
+        while len(self.onboard) > 0:  # O(N)
             self._find_next_delivery()  # O(N)
 
         # Go back to HUB
